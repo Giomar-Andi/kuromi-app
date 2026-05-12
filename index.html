@@ -1,26 +1,18 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>KUROMI MARYLAND</title>
     
-    <!-- Meta tags para iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="KUROMI MARYLAND">
     
-    <!-- Manifest para PWA -->
     <link rel="manifest" href="manifest.json">
-    
-    <!-- Iconos -->
     <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
-    
-    <!-- Estilos -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Fuente Kawaii -->
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -31,7 +23,6 @@
             <p id="current-date"></p>
         </header>
 
-        <!-- Sección de Estadísticas -->
         <section class="stats-container">
             <div class="stat-card">
                 <div class="stat-number" id="stat-classes">0</div>
@@ -43,16 +34,14 @@
             </div>
         </section>
 
-        <!-- Sección de Horario de Clases -->
         <section class="card schedule-section">
-            <h2> Horario de Clases</h2>
+            <h2>📚 Horario de Clases</h2>
             <div id="class-list" class="list-container">
                 <div class="empty-state">No hay clases registradas.</div>
             </div>
             <button onclick="openModal('class-modal')" class="add-btn">+ Agregar Clase</button>
         </section>
 
-        <!-- Sección de Recordatorios/Tareas -->
         <section class="card reminder-section">
             <h2> Tareas & Reuniones</h2>
             <div id="reminder-list" class="list-container">
@@ -62,11 +51,11 @@
         </section>
     </div>
 
-    <!-- Modal para Agregar Clase (CON NUEVOS CAMPOS) -->
+    <!-- Modal CLASES (Con Hora Fin) -->
     <div id="class-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('class-modal')">&times;</span>
-            <h3>Nueva Clase 📚</h3>
+            <h3>Nueva Clase </h3>
             
             <label>Nombre de la Materia</label>
             <input type="text" id="class-name" placeholder="ej. Cálculo II">
@@ -74,8 +63,16 @@
             <label>Profesor/a</label>
             <input type="text" id="class-teacher" placeholder="ej. Dr. Smith">
             
-            <label>Hora de Inicio</label>
-            <input type="time" id="class-time">
+            <div class="time-row">
+                <div>
+                    <label>Hora Inicio</label>
+                    <input type="time" id="class-time-start">
+                </div>
+                <div>
+                    <label>Hora Fin</label>
+                    <input type="time" id="class-time-end">
+                </div>
+            </div>
             
             <label>Aula / Salón</label>
             <input type="text" id="class-room" placeholder="ej. A-204">
@@ -94,35 +91,13 @@
                 <div>
                     <label>Mes Inicio</label>
                     <select id="start-month">
-                        <option value="Enero">Enero</option>
-                        <option value="Febrero">Febrero</option>
-                        <option value="Marzo">Marzo</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Mayo">Mayo</option>
-                        <option value="Junio">Junio</option>
-                        <option value="Julio">Julio</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Septiembre">Septiembre</option>
-                        <option value="Octubre">Octubre</option>
-                        <option value="Noviembre">Noviembre</option>
-                        <option value="Diciembre">Diciembre</option>
+                        <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
                 <div>
                     <label>Mes Fin</label>
                     <select id="end-month">
-                        <option value="Enero">Enero</option>
-                        <option value="Febrero">Febrero</option>
-                        <option value="Marzo">Marzo</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Mayo">Mayo</option>
-                        <option value="Junio">Junio</option>
-                        <option value="Julio">Julio</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Septiembre">Septiembre</option>
-                        <option value="Octubre">Octubre</option>
-                        <option value="Noviembre">Noviembre</option>
-                        <option value="Diciembre">Diciembre</option>
+                        <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
             </div>
@@ -131,7 +106,7 @@
         </div>
     </div>
 
-    <!-- Modal para Agregar Recordatorio -->
+    <!-- Modal RECORDATORIOS -->
     <div id="reminder-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('reminder-modal')">&times;</span>
