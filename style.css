@@ -18,7 +18,7 @@
 body {
     font-family: var(--font-main);
     /* FONDASO PRINCIPAL - Reemplaza esta URL por la que más te guste */
-    background-image: url('');
+    background-image: url('bg-main.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -48,7 +48,7 @@ header {
     margin-bottom: 25px;
     padding: 30px 20px;
     /* Imagen de fondo para el header - Puedes cambiarla */
-    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('bg.png');
+    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('bg-header.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 20px;
@@ -81,7 +81,7 @@ header p {
 .stat-card {
     flex: 1;
     /* Imagen de fondo para estadísticas */
-    background-image: linear-gradient(rgba(40, 20, 60, 0.85), rgba(40, 20, 60, 0.85)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(40, 20, 60, 0.85), rgba(40, 20, 60, 0.85)), url('bg-stats.jpg');
     background-size: cover;
     background-position: center;
     padding: 20px 15px;
@@ -118,14 +118,14 @@ header p {
 
 /* Fondo específico para Horario de Clases */
 .schedule-section {
-    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('bg-schedule.jpg');
     background-size: cover;
     background-position: center;
 }
 
 /* Fondo específico para Tareas & Reuniones */
 .reminder-section {
-    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('bg-reminders.jpg');
     background-size: cover;
     background-position: center;
 }
