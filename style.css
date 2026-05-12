@@ -17,8 +17,8 @@
 
 body {
     font-family: var(--font-main);
-    /* FONDASO PRINCIPAL - Reemplaza esta URL por la que más te guste */
-    background-image: url('https://i.pinimg.com/originals/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    /* FONDASO PRINCIPAL */
+    background-image: url('bg-main.jpg'); /* Asegúrate de tener esta imagen o usa una URL */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -27,12 +27,12 @@ body {
     padding-bottom: 80px;
 }
 
-/* Capa oscura sobre el fondo principal para legibilidad */
+/* Capa oscura sobre el fondo principal */
 body::before {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(26, 11, 46, 0.85); /* Oscurece el fondo */
+    background: rgba(26, 11, 46, 0.85);
     z-index: -1;
 }
 
@@ -42,20 +42,16 @@ body::before {
     padding: 20px;
 }
 
-/* Header con imagen de fondo sutil */
 header {
     text-align: center;
     margin-bottom: 25px;
     padding: 30px 20px;
-    /* Imagen de fondo para el header - Puedes cambiarla */
-    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('bg-header.jpg');
     background-size: cover;
     background-position: center;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     border: 1px solid var(--accent);
-    position: relative;
-    overflow: hidden;
 }
 
 header h1 {
@@ -68,10 +64,9 @@ header h1 {
 header p {
     color: var(--text-muted);
     font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Estadísticas con fondo */
+/* Estadísticas */
 .stats-container {
     display: flex;
     gap: 15px;
@@ -80,8 +75,7 @@ header p {
 
 .stat-card {
     flex: 1;
-    /* Imagen de fondo para estadísticas */
-    background-image: linear-gradient(rgba(40, 20, 60, 0.85), rgba(40, 20, 60, 0.85)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(40, 20, 60, 0.85), rgba(40, 20, 60, 0.85)), url('bg-stats.jpg');
     background-size: cover;
     background-position: center;
     padding: 20px 15px;
@@ -96,16 +90,14 @@ header p {
     font-size: 1.8rem;
     font-weight: bold;
     color: var(--accent);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .stat-label {
     font-size: 0.8rem;
     color: var(--text-muted);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Tarjetas Principales con fondos distintos */
+/* Tarjetas Principales */
 .card {
     border-radius: 20px;
     padding: 20px;
@@ -116,16 +108,14 @@ header p {
     overflow: hidden;
 }
 
-/* Fondo específico para Horario de Clases */
 .schedule-section {
-    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('bg-schedule.jpg');
     background-size: cover;
     background-position: center;
 }
 
-/* Fondo específico para Tareas & Reuniones */
 .reminder-section {
-    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('bg-reminders.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -139,7 +129,6 @@ header p {
     gap: 10px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .list-container {
@@ -154,7 +143,7 @@ header p {
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* Alineado arriba para contenido variable */
     transition: opacity 0.3s;
     backdrop-filter: blur(2px);
 }
@@ -164,25 +153,31 @@ header p {
     color: var(--accent);
     font-size: 0.9rem;
     min-width: 60px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin-right: 10px;
 }
 
 .item-details {
     flex-grow: 1;
-    margin-left: 10px;
 }
 
 .item-details strong {
     display: block;
     color: white;
     font-size: 1rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin-bottom: 4px;
 }
 
 .item-details small {
+    display: block;
     color: var(--text-muted);
     font-size: 0.8rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    margin-bottom: 4px;
+}
+
+.item-details .tags {
+    font-size: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
 }
 
 .delete-btn {
@@ -193,11 +188,7 @@ header p {
     cursor: pointer;
     padding: 5px;
     opacity: 0.7;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-.delete-btn:hover {
-    opacity: 1;
+    margin-left: 10px;
 }
 
 .add-btn {
@@ -213,12 +204,10 @@ header p {
     margin-top: 10px;
     transition: all 0.2s;
     box-shadow: 0 4px 15px rgba(217, 70, 239, 0.3);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .add-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(217, 70, 239, 0.4);
 }
 
 /* Modales */
@@ -242,65 +231,41 @@ header p {
     border: 2px solid var(--accent);
     color: white;
     box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-content h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--accent);
 }
 
 .close {
     float: right;
     font-size: 1.5rem;
     cursor: pointer;
-    color: var(--accent);
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid var(--secondary);
-    border-radius: 8px;
-    font-family: var(--font-main);
-    background: rgba(0,0,0,0.3);
-    color: white;
-    backdrop-filter: blur(2px);
-}
-
-input::placeholder, textarea::placeholder {
     color: var(--text-muted);
 }
 
-.save-btn {
-    width: 100%;
-    padding: 12px;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.2s;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-.save-btn:hover {
-    background: #ff1493;
-}
-
-.empty-state {
-    text-align: center;
-    color: var(--text-muted);
-    padding: 20px;
-    font-style: italic;
-    font-size: 0.9rem;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-/* Estilos para los nuevos campos del formulario */
+/* Formularios */
 .modal-content label {
     display: block;
     margin-top: 10px;
     margin-bottom: 5px;
     font-size: 0.9rem;
     color: var(--text-muted);
+}
+
+input, textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid var(--secondary);
+    border-radius: 8px;
+    font-family: var(--font-main);
+    background: rgba(0,0,0,0.3);
+    color: white;
 }
 
 .days-selector {
@@ -314,16 +279,19 @@ input::placeholder, textarea::placeholder {
 
 .days-selector label {
     cursor: pointer;
-    user-select: none;
     font-weight: bold;
     color: var(--text-light);
-    transition: color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
 }
 
 .days-selector input[type="checkbox"] {
-    width: auto;
-    margin-right: 5px;
-    accent-color: var(--accent); /* Color del checkbox */
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+    accent-color: var(--accent);
 }
 
 .date-range {
@@ -335,13 +303,22 @@ input::placeholder, textarea::placeholder {
     flex: 1;
 }
 
-select {
+.save-btn {
     width: 100%;
     padding: 12px;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.3);
+    background: var(--accent);
     color: white;
-    border: 1px solid var(--secondary);
-    font-family: var(--font-main);
-    appearance: none; /* Quita el estilo por defecto del navegador */
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+    font-style: italic;
+    font-size: 0.9rem;
 }
