@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KUROMI MARYLAND</title>
+    <title>Horarios Kuromi</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -19,18 +19,18 @@
 
     <div class="app-container">
         <header>
-            <h1>KUROMI MARYLAND 🎀</h1>
+            <h1>BIENVENIDA A MARYLAND, JAZMIN 🎀</h1>
             <p id="current-date"></p>
         </header>
 
         <section class="stats-container">
             <div class="stat-card">
                 <div class="stat-number" id="stat-classes">0</div>
-                <div class="stat-label">Clases Hoy</div>
+                <div class="stat-label">Clases registradas</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="stat-reminders">0</div>
-                <div class="stat-label">Tareas Pendientes</div>
+                <div class="stat-label">Recordatorios Pendientes</div>
             </div>
         </section>
 
@@ -43,7 +43,7 @@
         </section>
 
         <section class="card reminder-section">
-            <h2> Tareas & Reuniones</h2>
+            <h2> Recordatorio de tareas & reuniones</h2>
             <div id="reminder-list" class="list-container">
                 <div class="empty-state">Todo limpio por ahora... 😈</div>
             </div>
@@ -57,27 +57,27 @@
             <span class="close" onclick="closeModal('class-modal')">&times;</span>
             <h3>Nueva Clase </h3>
             
-            <label>Nombre de la Materia</label>
+            <label>Nombre de la Materia:</label>
             <input type="text" id="class-name" placeholder="ej. Cálculo II">
             
-            <label>Profesor/a</label>
+            <label>Profesor/a:</label>
             <input type="text" id="class-teacher" placeholder="ej. Dr. Smith">
             
             <div class="time-row">
                 <div>
-                    <label>Hora Inicio</label>
+                    <label>Hora Inicio:</label>
                     <input type="time" id="class-time-start">
                 </div>
                 <div>
-                    <label>Hora Fin</label>
+                    <label>Hora Fin:</label>
                     <input type="time" id="class-time-end">
                 </div>
             </div>
             
-            <label>Aula / Salón</label>
+            <label>Aula / Salón:</label>
             <input type="text" id="class-room" placeholder="ej. A-204">
             
-            <label>Días de la Semana</label>
+            <label>Días de la Semana:</label>
             <div class="days-selector">
                 <label><input type="checkbox" name="day" value="L"> L</label>
                 <label><input type="checkbox" name="day" value="M"> M</label>
@@ -89,20 +89,20 @@
             
             <div class="date-range">
                 <div>
-                    <label>Mes Inicio</label>
+                    <label>Mes Inicio:</label>
                     <select id="start-month">
                         <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
                 <div>
-                    <label>Mes Fin</label>
+                    <label>Mes Fin:</label>
                     <select id="end-month">
                         <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
             </div>
             
-            <button onclick="addClass()" class="save-btn">Guardar 💜</button>
+            <button onclick="addClass()" class="save-btn">Añadir clase 💜</button>
         </div>
     </div>
 
@@ -111,13 +111,13 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal('reminder-modal')">&times;</span>
             <h3>Nuevo Recordatorio 💀</h3>
-            <label>Título</label>
+            <label>Título:</label>
             <input type="text" id="rem-title" placeholder="ej. Entrega Proyecto">
             
-            <label>Fecha y Hora</label>
+            <label>Fecha y Hora:</label>
             <input type="datetime-local" id="rem-datetime">
             
-            <label>Detalles</label>
+            <label>Detalles:</label>
             <textarea id="rem-desc" rows="3" placeholder="Notas adicionales..."></textarea>
             
             <button onclick="addReminder()" class="save-btn">Guardar 💀</button>
