@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>KUROMI MARYLAND</title>
+    
+    <!-- Meta tags para iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="KUROMI MARYLAND">
+    
+    <!-- Manifest para PWA -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Iconos (Debes descargar las imágenes y ponerlas en la carpeta) -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Fuente Kawaii -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+        <header>
+            <h1>KUROMI MARYLAND 🎀</h1>
+            <p id="current-date"></p>
+        </header>
+
+        <!-- Sección de Horario de Clases -->
+        <section class="card schedule-section">
+            <h2>📚 Horario de Hoy</h2>
+            <div id="class-list" class="list-container">
+                <!-- Las clases se cargarán aquí -->
+                <div class="empty-state">No hay clases registradas hoy.</div>
+            </div>
+            <button onclick="openModal('class-modal')" class="add-btn">+ Agregar Clase</button>
+        </section>
+
+        <!-- Sección de Recordatorios/Tareas -->
+        <section class="card reminder-section">
+            <h2>📝 Tareas & Reuniones</h2>
+            <div id="reminder-list" class="list-container">
+                <!-- Los recordatorios se cargarán aquí -->
+                <div class="empty-state">Todo limpio por ahora... 😈</div>
+            </div>
+            <button onclick="openModal('reminder-modal')" class="add-btn">+ Nuevo Recordatorio</button>
+        </section>
+    </div>
+
+    <!-- Modal para Agregar Clase -->
+    <div id="class-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('class-modal')">&times;</span>
+            <h3>Nueva Clase</h3>
+            <input type="text" id="class-name" placeholder="Nombre de la materia (ej. Matemáticas)">
+            <input type="time" id="class-time">
+            <input type="text" id="class-room" placeholder="Aula o Salón">
+            <button onclick="addClass()" class="save-btn">Guardar 💜</button>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar Recordatorio -->
+    <div id="reminder-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('reminder-modal')">&times;</span>
+            <h3>Nuevo Recordatorio</h3>
+            <input type="text" id="rem-title" placeholder="Título (ej. Entrega Proyecto)">
+            <input type="datetime-local" id="rem-datetime">
+            <textarea id="rem-desc" placeholder="Detalles..."></textarea>
+            <button onclick="addReminder()" class="save-btn">Guardar 💀</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
