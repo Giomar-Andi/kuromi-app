@@ -14,6 +14,9 @@
     <link rel="apple-touch-icon" href="icons/icon-192.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -26,11 +29,11 @@
         <section class="stats-container">
             <div class="stat-card">
                 <div class="stat-number" id="stat-classes">0</div>
-                <div class="stat-label">Clases registradas</div>
+                <div class="stat-label">Clases añadidas</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="stat-reminders">0</div>
-                <div class="stat-label">Recordatorios Pendientes</div>
+                <div class="stat-label">Recordatorios pendientes</div>
             </div>
         </section>
 
@@ -51,7 +54,7 @@
         </section>
     </div>
 
-    <!-- Modal CLASES (Con Hora Fin) -->
+    <!-- Modal CLASES -->
     <div id="class-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('class-modal')">&times;</span>
@@ -91,18 +94,20 @@
                 <div>
                     <label>Mes Inicio:</label>
                     <select id="start-month">
+                        <option value="">Seleccionar...</option>
                         <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
                 <div>
                     <label>Mes Fin:</label>
                     <select id="end-month">
+                        <option value="">Seleccionar...</option>
                         <option value="Enero">Enero</option><option value="Febrero">Febrero</option><option value="Marzo">Marzo</option><option value="Abril">Abril</option><option value="Mayo">Mayo</option><option value="Junio">Junio</option><option value="Julio">Julio</option><option value="Agosto">Agosto</option><option value="Septiembre">Septiembre</option><option value="Octubre">Octubre</option><option value="Noviembre">Noviembre</option><option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
             </div>
             
-            <button onclick="addClass()" class="save-btn">Añadir clase 💜</button>
+            <button onclick="addClass()" class="save-btn">+ Añadir clase 💜</button>
         </div>
     </div>
 
@@ -120,7 +125,7 @@
             <label>Detalles:</label>
             <textarea id="rem-desc" rows="3" placeholder="Notas adicionales..."></textarea>
             
-            <button onclick="addReminder()" class="save-btn">Añadir recordatorio 💜</button>
+            <button onclick="addReminder()" class="save-btn">+ Añadir recordatorio 💜</button>
         </div>
     </div>
 
