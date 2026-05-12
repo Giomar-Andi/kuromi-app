@@ -1,11 +1,10 @@
 :root {
-    --primary: #2e004f; /* Morado muy oscuro */
-    --secondary: #581c87; /* Violeta medio */
-    --accent: #d946ef; /* Fucsia serio */
-    --bg-dark: #1a0b2e; /* Fondo casi negro */
-    --glass-bg: rgba(40, 20, 60, 0.85); /* Vidrio oscuro */
-    --text-light: #f3e5f5; /* Texto claro */
-    --text-muted: #c4b5fd; /* Texto secundario */
+    --primary: #2e004f;
+    --secondary: #581c87;
+    --accent: #d946ef;
+    --bg-dark: #1a0b2e;
+    --text-light: #f3e5f5;
+    --text-muted: #c4b5fd;
     --font-main: 'Fredoka', sans-serif;
 }
 
@@ -18,10 +17,23 @@
 
 body {
     font-family: var(--font-main);
-    background-color: var(--bg-dark);
+    /* FONDASO PRINCIPAL - Reemplaza esta URL por la que más te guste */
+    background-image: url('https://i.pinimg.com/originals/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text-light);
     min-height: 100vh;
     padding-bottom: 80px;
+}
+
+/* Capa oscura sobre el fondo principal para legibilidad */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(26, 11, 46, 0.85); /* Oscurece el fondo */
+    z-index: -1;
 }
 
 .app-container {
@@ -30,29 +42,36 @@ body {
     padding: 20px;
 }
 
-/* Header Serio */
+/* Header con imagen de fondo sutil */
 header {
     text-align: center;
     margin-bottom: 25px;
-    padding: 20px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    padding: 30px 20px;
+    /* Imagen de fondo para el header - Puedes cambiarla */
+    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-size: cover;
+    background-position: center;
     border-radius: 20px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     border: 1px solid var(--accent);
+    position: relative;
+    overflow: hidden;
 }
 
 header h1 {
     font-size: 1.8rem;
     letter-spacing: 1px;
     margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 header p {
     color: var(--text-muted);
     font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Estadísticas */
+/* Estadísticas con fondo */
 .stats-container {
     display: flex;
     gap: 15px;
@@ -61,33 +80,54 @@ header p {
 
 .stat-card {
     flex: 1;
-    background: var(--glass-bg);
-    padding: 15px;
+    /* Imagen de fondo para estadísticas */
+    background-image: linear-gradient(rgba(40, 20, 60, 0.85), rgba(40, 20, 60, 0.85)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 20px 15px;
     border-radius: 15px;
     text-align: center;
     border: 1px solid rgba(217, 70, 239, 0.3);
     backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
     color: var(--accent);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .stat-label {
     font-size: 0.8rem;
     color: var(--text-muted);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
-/* Tarjetas Principales */
+/* Tarjetas Principales con fondos distintos */
 .card {
-    background: var(--glass-bg);
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fondo específico para Horario de Clases */
+.schedule-section {
+    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Fondo específico para Tareas & Reuniones */
+.reminder-section {
+    background-image: linear-gradient(rgba(40, 20, 60, 0.9), rgba(40, 20, 60, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .card h2 {
@@ -99,6 +139,7 @@ header p {
     gap: 10px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     padding-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .list-container {
@@ -106,7 +147,7 @@ header p {
 }
 
 .item {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.4);
     border-left: 4px solid var(--accent);
     padding: 15px;
     margin-bottom: 10px;
@@ -115,6 +156,7 @@ header p {
     justify-content: space-between;
     align-items: center;
     transition: opacity 0.3s;
+    backdrop-filter: blur(2px);
 }
 
 .item-time {
@@ -122,6 +164,7 @@ header p {
     color: var(--accent);
     font-size: 0.9rem;
     min-width: 60px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .item-details {
@@ -133,11 +176,13 @@ header p {
     display: block;
     color: white;
     font-size: 1rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .item-details small {
     color: var(--text-muted);
     font-size: 0.8rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .delete-btn {
@@ -148,6 +193,7 @@ header p {
     cursor: pointer;
     padding: 5px;
     opacity: 0.7;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .delete-btn:hover {
@@ -157,7 +203,7 @@ header p {
 .add-btn {
     width: 100%;
     padding: 12px;
-    background: var(--secondary);
+    background: linear-gradient(45deg, var(--secondary), var(--accent));
     color: white;
     border: none;
     border-radius: 10px;
@@ -165,11 +211,14 @@ header p {
     font-weight: 600;
     cursor: pointer;
     margin-top: 10px;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(217, 70, 239, 0.3);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 .add-btn:hover {
-    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(217, 70, 239, 0.4);
 }
 
 /* Modales */
@@ -177,20 +226,22 @@ header p {
     display: none;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     z-index: 1000;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
 }
 
 .modal-content {
-    background: #2e004f;
+    background: linear-gradient(135deg, #2e004f, #581c87);
     padding: 25px;
     border-radius: 20px;
     width: 90%;
     max-width: 400px;
     border: 2px solid var(--accent);
     color: white;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
 }
 
 .close {
@@ -198,6 +249,7 @@ header p {
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--accent);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 
 input, textarea {
@@ -207,8 +259,13 @@ input, textarea {
     border: 1px solid var(--secondary);
     border-radius: 8px;
     font-family: var(--font-main);
-    background: rgba(0,0,0,0.2);
+    background: rgba(0,0,0,0.3);
     color: white;
+    backdrop-filter: blur(2px);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-muted);
 }
 
 .save-btn {
@@ -220,6 +277,12 @@ input, textarea {
     border-radius: 8px;
     font-weight: bold;
     cursor: pointer;
+    transition: background 0.2s;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.save-btn:hover {
+    background: #ff1493;
 }
 
 .empty-state {
@@ -228,4 +291,5 @@ input, textarea {
     padding: 20px;
     font-style: italic;
     font-size: 0.9rem;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
