@@ -48,7 +48,7 @@ header {
     margin-bottom: 25px;
     padding: 30px 20px;
     /* Imagen de fondo para el header - Puedes cambiarla */
-    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('https://i.pinimg.com/564x/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg');
+    background-image: linear-gradient(rgba(46, 0, 79, 0.9), rgba(88, 28, 135, 0.9)), url('bg.png');
     background-size: cover;
     background-position: center;
     border-radius: 20px;
