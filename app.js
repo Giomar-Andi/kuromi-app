@@ -38,13 +38,13 @@ function cleanPastReminders() {
     }
 }
 
-// --- Lógica de Clases ACTUALIZADA CON HORA FIN ---
+// --- Lógica de Clases CON VALIDACIÓN Y ALERTAS ---
 function addClass() {
-    const name = document.getElementById('class-name').value;
-    const teacher = document.getElementById('class-teacher').value;
+    const name = document.getElementById('class-name').value.trim();
+    const teacher = document.getElementById('class-teacher').value.trim();
     const timeStart = document.getElementById('class-time-start').value;
     const timeEnd = document.getElementById('class-time-end').value;
-    const room = document.getElementById('class-room').value;
+    const room = document.getElementById('class-room').value.trim();
     
     const checkboxes = document.querySelectorAll('input[name="day"]:checked');
     let days = [];
@@ -53,13 +53,44 @@ function addClass() {
     const startMonth = document.getElementById('start-month').value;
     const endMonth = document.getElementById('end-month').value;
 
-    if (!name || !timeStart || !timeEnd || days.length === 0) return alert("Faltan datos esenciales 😈");
+    // Contar campos llenos
+    let filledCount = 0;
+    if (name) filledCount++;
+    if (teacher) filledCount++;
+    if (timeStart) filledCount++;
+    if (timeEnd) filledCount++;
+    if (room) filledCount++;
+    if (days.length > 0) filledCount++;
+    if (startMonth) filledCount++;
+    if (endMonth) filledCount++;
+
+    // Validación: Mínimo 2 campos llenos
+    if (filledCount < 2) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: 'Por favor, llena al menos 2 campos para guardar la clase. 😈',
+            confirmButtonText: 'Entendido'
+        });
+        return;
+    }
+
+    // Validación extra: Si pone horas, debe poner ambas
+    if ((timeStart && !timeEnd) || (!timeStart && timeEnd)) {
+         Swal.fire({
+            icon: 'error',
+            title: 'Error de Hora',
+            text: 'Si pones hora de inicio, pon también la de fin. ⏰',
+            confirmButtonText: 'Corregir'
+        });
+        return;
+    }
 
     const classes = JSON.parse(localStorage.getItem('kuromi_classes')) || [];
     
     classes.push({ 
         id: Date.now(), 
-        name, 
+        name: name || 'Sin Nombre', 
         teacher, 
         timeStart, 
         timeEnd, 
@@ -76,6 +107,15 @@ function addClass() {
     loadClasses();
     updateStats();
     
+    // Alerta de Éxito
+    Swal.fire({
+        icon: 'success',
+        title: '¡Clase Guardada!',
+        text: 'Tu horario ha sido actualizado. 🎀',
+        timer: 1500,
+        showConfirmButton: false
+    });
+    
     // Limpiar
     document.getElementById('class-name').value = '';
     document.getElementById('class-teacher').value = '';
@@ -83,6 +123,8 @@ function addClass() {
     document.getElementById('class-time-end').value = '';
     document.getElementById('class-room').value = '';
     document.querySelectorAll('input[name="day"]').forEach(c => c.checked = false);
+    document.getElementById('start-month').value = '';
+    document.getElementById('end-month').value = '';
 }
 
 function loadClasses() {
@@ -96,43 +138,66 @@ function loadClasses() {
     }
 
     classes.forEach(c => {
-        const daysStr = c.days.join(', ');
+        const daysStr = c.days.length > 0 ? c.days.join(', ') : 'Sin días';
         
         const div = document.createElement('div');
         div.className = 'item';
         div.innerHTML = `
             <div class="item-time">
-                ${c.timeStart}
-                <span class="end">${c.timeEnd}</span>
+                ${c.timeStart || '--:--'}
+                <span class="end">${c.timeEnd || ''}</span>
             </div>
             <div class="item-details">
                 <strong>${c.name}</strong>
                 <small>👩🏫 ${c.teacher || 'Sin prof.'} | 📍 ${c.room || '-'}</small>
                 <div class="tags">
-                    📅 ${daysStr} | ${c.startMonth} - ${c.endMonth}
+                    📅 ${daysStr} | ${c.startMonth || '?'} - ${c.endMonth || '?'}
                 </div>
             </div>
-            <button class="delete-btn" onclick="deleteItem('kuromi_classes', ${c.id})">✕</button>
+            <button class="delete-btn" onclick="confirmDelete('kuromi_classes', ${c.id})">✕</button>
         `;
         list.appendChild(div);
     });
 }
 
-// --- Lógica de Recordatorios (Sin cambios) ---
+// --- Lógica de Recordatorios CON VALIDACIÓN Y ALERTAS ---
 function addReminder() {
-    const title = document.getElementById('rem-title').value;
+    const title = document.getElementById('rem-title').value.trim();
     const datetime = document.getElementById('rem-datetime').value;
-    const desc = document.getElementById('rem-desc').value;
-    if (!title || !datetime) return alert("Faltan datos ");
+    const desc = document.getElementById('rem-desc').value.trim();
+
+    // Contar campos llenos
+    let filledCount = 0;
+    if (title) filledCount++;
+    if (datetime) filledCount++;
+    if (desc) filledCount++;
+
+    if (filledCount < 2) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Faltan datos',
+            text: 'Llena al menos 2 campos para crear el recordatorio. 💀',
+            confirmButtonText: 'Ok'
+        });
+        return;
+    }
 
     const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
-    reminders.push({ id: Date.now(), title, datetime, desc, notified: false });
+    reminders.push({ id: Date.now(), title: title || 'Sin Título', datetime, desc, notified: false });
     reminders.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
     
     localStorage.setItem('kuromi_reminders', JSON.stringify(reminders));
     closeModal('reminder-modal');
     loadReminders();
     updateStats();
+    
+    Swal.fire({
+        icon: 'success',
+        title: '¡Recordatorio Creado!',
+        text: 'No olvides cumplirlo. 😈',
+        timer: 1500,
+        showConfirmButton: false
+    });
     
     document.getElementById('rem-title').value = '';
     document.getElementById('rem-datetime').value = '';
@@ -164,14 +229,38 @@ function loadReminders() {
                 <strong>${r.title}</strong>
                 <small>${r.desc || ''}</small>
             </div>
-            <button class="delete-btn" onclick="deleteItem('kuromi_reminders', ${r.id})">✕</button>
+            <button class="delete-btn" onclick="confirmDelete('kuromi_reminders', ${r.id})">✕</button>
         `;
         list.appendChild(div);
     });
 }
 
+// --- Función de Eliminación con Confirmación Bonita ---
+function confirmDelete(storageKey, id) {
+    Swal.fire({
+        title: '¿Eliminar?',
+        text: "Esta acción no se puede deshacer.",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#d946ef',
+        cancelButtonColor: '#4a4a4a',
+        confirmButtonText: 'Sí, borrar',
+        cancelButtonText: 'Cancelar',
+        background: '#2e004f',
+        color: '#fff'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteItem(storageKey, id);
+            Swal.fire(
+                '¡Borrado!',
+                'El elemento ha sido eliminado.',
+                'success'
+            )
+        }
+    });
+}
+
 function deleteItem(storageKey, id) {
-    if(!confirm("¿Seguro que quieres borrar esto?")) return;
     let items = JSON.parse(localStorage.getItem(storageKey)) || [];
     items = items.filter(item => item.id !== id);
     localStorage.setItem(storageKey, JSON.stringify(items));
