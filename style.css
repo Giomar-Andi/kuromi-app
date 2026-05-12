@@ -121,7 +121,6 @@ input, textarea, select {
     font-family: var(--font-main); background: rgba(0,0,0,0.3); color: white;
 }
 
-/* NUEVO: Estilo para fila de tiempos */
 .time-row { display: flex; gap: 10px; }
 .time-row div { flex: 1; }
 
@@ -143,3 +142,30 @@ input, textarea, select {
     border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px;
 }
 .empty-state { text-align: center; color: var(--text-muted); padding: 20px; font-style: italic; font-size: 0.9rem; }
+
+/* --- ESTILOS PERSONALIZADOS PARA SWEETALERT2 (KUROMI STYLE) --- */
+.swal2-popup {
+    background: linear-gradient(135deg, #2e004f, #581c87) !important;
+    border: 2px solid var(--accent) !important;
+    color: white !important;
+    font-family: var(--font-main) !important;
+}
+.swal2-title {
+    color: var(--accent) !important;
+    text-shadow: 1px 1px 2px black;
+}
+.swal2-html-container {
+    color: var(--text-light) !important;
+}
+.swal2-confirm {
+    background-color: var(--accent) !important;
+    font-weight: bold;
+}
+.swal2-cancel {
+    background-color: #4a4a4a !important;
+}
+.swal2-input, .swal2-textarea {
+    background: rgba(0,0,0,0.3) !important;
+    color: white !important;
+    border: 1px solid var(--secondary) !important;
+}
