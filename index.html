@@ -1,355 +1,68 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kuromi Maryland</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#2c0e37">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="KUROMI MARYLAND">
-    <link rel="apple-touch-icon" href="icons/icon-192.png">
-    <style>
-        :root {
-            --kuromi-purple: #4a1c59;
-            --kuromi-dark: #2c0e37;
-            --kuromi-pink: #d63384;
-            --kuromi-black: #1a1a1a;
-            --text-light: #f8f9fa;
-            --baku-blue: #a5d8ff;
-            --inactive-gray: #6c757d;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--kuromi-dark);
-            color: var(--text-light);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--kuromi-purple), var(--kuromi-pink));
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 10;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        main {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            padding-bottom: 80px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        /* Estilo para clases inactivas (fuera de fechas) */
-        .card.inactive {
-            opacity: 0.5;
-            background: rgba(0, 0, 0, 0.2);
-            border-color: var(--inactive-gray);
-        }
-
-        .class-card h3 {
-            margin: 0 0 5px 0;
-            color: var(--baku-blue);
-        }
-
-        .class-card p {
-            margin: 2px 0;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .class-card .days-badge {
-            display: inline-block;
-            background: var(--kuromi-pink);
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-        
-        .class-card .date-range {
-            font-size: 0.8rem;
-            color: var(--baku-blue);
-            margin-top: 5px;
-            display: block;
-        }
-
-        .delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            color: rgba(255,255,255,0.5);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .fab {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--kuromi-pink);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.4);
-            cursor: pointer;
-            border: none;
-            z-index: 20;
-            transition: transform 0.2s;
-        }
-
-        .fab:active {
-            transform: scale(0.95);
-        }
-
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            justify-content: center;
-            align-items: flex-end;
-            z-index: 30;
-        }
-
-        .modal {
-            background: var(--kuromi-purple);
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px 20px 0 0;
-            padding: 25px;
-            box-sizing: border-box;
-            animation: slideUp 0.3s ease-out;
-            max-height: 90vh; /* Para que no se salga en pantallas pequeñas */
-            overflow-y: auto;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
-        }
-
-        .modal h2 {
-            margin-top: 0;
-            color: var(--baku-blue);
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
-        }
-
-        input[type="text"], input[type="time"], select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
-            background: rgba(0,0,0,0.3);
-            color: white;
-            font-size: 1rem;
-            box-sizing: border-box;
-            appearance: none; /* Estilo nativo limpio */
-        }
-        
-        select {
-            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23a5d8ff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px top 50%;
-            background-size: 12px auto;
-        }
-
-        .day-selector {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
-        .day-checkbox {
-            display: none;
-        }
-
-        .day-label {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid transparent;
-        }
-
-        .day-checkbox:checked + .day-label {
-            background: var(--kuromi-pink);
-            color: white;
-            font-weight: bold;
-            border-color: white;
-        }
-
-        .btn-save {
-            width: 100%;
-            padding: 15px;
-            background: var(--baku-blue);
-            color: var(--kuromi-dark);
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin-top: 25px;
-            cursor: pointer;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.5);
-            cursor: pointer;
-        }
-        
-        .empty-state {
-            text-align: center;
-            opacity: 0.5;
-            margin-top: 50px;
-        }
-        
-        /* Row for months */
-        .row {
-            display: flex;
-            gap: 10px;
-        }
-        .col {
-            flex: 1;
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>KUROMI MARYLAND</h1>
-    </header>
-
-    <main id="schedule-list">
-        <!-- Las clases se cargarán aquí -->
-        <div class="empty-state">
-            <p>No hay clases aún.<br>¡Toca el + para añadir!</p>
-        </div>
-    </main>
-
-    <button class="fab" onclick="openModal()">+</button>
-
-    <!-- Modal Form -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2>Nueva Clase</h2>
+    <!-- Modal para Agregar Clase -->
+    <div id="class-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('class-modal')">&times;</span>
+            <h3>Nueva Clase 📚</h3>
             
-            <label>Nombre de la Asignatura</label>
-            <input type="text" id="className" placeholder="Ej. Matemáticas">
-
-            <label>Profesor</label>
-            <input type="text" id="professorName" placeholder="Ej. Sr. Baku">
-
+            <label>Nombre de la Materia</label>
+            <input type="text" id="class-name" placeholder="ej. Cálculo II">
+            
+            <label>Profesor/a</label>
+            <input type="text" id="class-teacher" placeholder="ej. Dr. Smith">
+            
             <label>Hora de Inicio</label>
-            <input type="time" id="startTime">
-
-            <label>Días de la semana</label>
-            <div class="day-selector">
-                <input type="checkbox" id="d1" class="day-checkbox" value="L"><label for="d1" class="day-label">L</label>
-                <input type="checkbox" id="d2" class="day-checkbox" value="M"><label for="d2" class="day-label">M</label>
-                <input type="checkbox" id="d3" class="day-checkbox" value="X"><label for="d3" class="day-label">X</label>
-                <input type="checkbox" id="d4" class="day-checkbox" value="J"><label for="d4" class="day-label">J</label>
-                <input type="checkbox" id="d5" class="day-checkbox" value="V"><label for="d5" class="day-label">V</label>
-                <input type="checkbox" id="d6" class="day-checkbox" value="S"><label for="d6" class="day-label">S</label>
-                <input type="checkbox" id="d0" class="day-checkbox" value="D"><label for="d0" class="day-label">D</label>
+            <input type="time" id="class-time">
+            
+            <label>Aula / Salón</label>
+            <input type="text" id="class-room" placeholder="ej. A-204">
+            
+            <label>Días de la Semana</label>
+            <div class="days-selector">
+                <label><input type="checkbox" name="day" value="L"> L</label>
+                <label><input type="checkbox" name="day" value="M"> M</label>
+                <label><input type="checkbox" name="day" value="X"> X</label>
+                <label><input type="checkbox" name="day" value="J"> J</label>
+                <label><input type="checkbox" name="day" value="V"> V</label>
+                <label><input type="checkbox" name="day" value="S"> S</label>
             </div>
-
-            <div class="row">
-                <div class="col">
+            
+            <div class="date-range">
+                <div>
                     <label>Mes Inicio</label>
-                    <select id="startMonth">
-                        <option value="0">Enero</option>
-                        <option value="1">Febrero</option>
-                        <option value="2">Marzo</option>
-                        <option value="3">Abril</option>
-                        <option value="4">Mayo</option>
-                        <option value="5">Junio</option>
-                        <option value="6">Julio</option>
-                        <option value="7">Agosto</option>
-                        <option value="8">Septiembre</option>
-                        <option value="9">Octubre</option>
-                        <option value="10">Noviembre</option>
-                        <option value="11">Diciembre</option>
+                    <select id="start-month">
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Mayo">Mayo</option>
+                        <option value="Junio">Junio</option>
+                        <option value="Julio">Julio</option>
+                        <option value="Agosto">Agosto</option>
+                        <option value="Septiembre">Septiembre</option>
+                        <option value="Octubre">Octubre</option>
+                        <option value="Noviembre">Noviembre</option>
+                        <option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
-                <div class="col">
+                <div>
                     <label>Mes Fin</label>
-                    <select id="endMonth">
-                        <option value="0">Enero</option>
-                        <option value="1">Febrero</option>
-                        <option value="2">Marzo</option>
-                        <option value="3">Abril</option>
-                        <option value="4" selected>Mayo</option>
-                        <option value="5">Junio</option>
-                        <option value="6">Julio</option>
-                        <option value="7">Agosto</option>
-                        <option value="8">Septiembre</option>
-                        <option value="9">Octubre</option>
-                        <option value="10">Noviembre</option>
-                        <option value="11">Diciembre</option>
+                    <select id="end-month">
+                        <option value="Enero">Enero</option>
+                        <option value="Febrero">Febrero</option>
+                        <option value="Marzo">Marzo</option>
+                        <option value="Abril">Abril</option>
+                        <option value="Mayo">Mayo</option>
+                        <option value="Junio">Junio</option>
+                        <option value="Julio">Julio</option>
+                        <option value="Agosto">Agosto</option>
+                        <option value="Septiembre">Septiembre</option>
+                        <option value="Octubre">Octubre</option>
+                        <option value="Noviembre">Noviembre</option>
+                        <option value="Diciembre">Diciembre</option>
                     </select>
                 </div>
             </div>
-
-            <button class="btn-save" onclick="saveClass()">Guardar Horario</button>
+            
+            <button onclick="addClass()" class="save-btn">Guardar 💜</button>
         </div>
     </div>
-
-    <script src="app.js"></script>
-</body>
-</html>
