@@ -1,16 +1,53 @@
-// Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     loadDate();
+    cleanPastReminders(); // Borrar lo pasado al iniciar
     loadClasses();
     loadReminders();
+    updateStats(); // Actualizar estadísticas
     requestNotificationPermission();
-    setInterval(checkNotifications, 60000); // Chequear cada minuto
+    setInterval(() => {
+        checkNotifications();
+        cleanPastReminders(); // Borrar lo pasado cada minuto
+        updateStats();
+    }, 60000);
 });
 
 // Fecha Actual
 function loadDate() {
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     document.getElementById('current-date').innerText = new Date().toLocaleDateString('es-ES', options);
+}
+
+// --- Estadísticas ---
+function updateStats() {
+    const classes = JSON.parse(localStorage.getItem('kuromi_classes')) || [];
+    const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
+    
+    // Contar clases de hoy (simplificado: asumimos todas las guardadas son de hoy o futuras)
+    const classCount = classes.length;
+    
+    // Contar recordatorios futuros
+    const now = new Date();
+    const pendingReminders = reminders.filter(r => new Date(r.datetime) > now).length;
+
+    document.getElementById('stat-classes').innerText = classCount;
+    document.getElementById('stat-reminders').innerText = pendingReminders;
+}
+
+// --- Limpieza Automática ---
+function cleanPastReminders() {
+    const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
+    const now = new Date();
+    
+    // Filtrar solo los que NO han pasado
+    const activeReminders = reminders.filter(r => new Date(r.datetime) > now);
+    
+    // Si hay cambios, guardar y recargar
+    if (activeReminders.length !== reminders.length) {
+        localStorage.setItem('kuromi_reminders', JSON.stringify(activeReminders));
+        loadReminders();
+        updateStats();
+    }
 }
 
 // --- Lógica de Clases ---
@@ -23,15 +60,13 @@ function addClass() {
 
     const classes = JSON.parse(localStorage.getItem('kuromi_classes')) || [];
     classes.push({ id: Date.now(), name, time, room });
-    
-    // Ordenar por hora
     classes.sort((a, b) => a.time.localeCompare(b.time));
     
     localStorage.setItem('kuromi_classes', JSON.stringify(classes));
     closeModal('class-modal');
     loadClasses();
+    updateStats();
     
-    // Limpiar inputs
     document.getElementById('class-name').value = '';
     document.getElementById('class-time').value = '';
     document.getElementById('class-room').value = '';
@@ -43,7 +78,7 @@ function loadClasses() {
     
     list.innerHTML = '';
     if (classes.length === 0) {
-        list.innerHTML = '<div class="empty-state">No hay clases registradas hoy.</div>';
+        list.innerHTML = '<div class="empty-state">No hay clases registradas.</div>';
         return;
     }
 
@@ -53,10 +88,10 @@ function loadClasses() {
         div.innerHTML = `
             <div class="item-time">${c.time}</div>
             <div class="item-details">
-                <strong>${c.name}</strong><br>
+                <strong>${c.name}</strong>
                 <small>📍 ${c.room || 'Sin aula'}</small>
             </div>
-            <button class="delete-btn" onclick="deleteItem('kuromi_classes', ${c.id})">🗑️</button>
+            <button class="delete-btn" onclick="deleteItem('kuromi_classes', ${c.id})">✕</button>
         `;
         list.appendChild(div);
     });
@@ -68,16 +103,16 @@ function addReminder() {
     const datetime = document.getElementById('rem-datetime').value;
     const desc = document.getElementById('rem-desc').value;
 
-    if (!title || !datetime) return alert("Faltan datos ");
+    if (!title || !datetime) return alert("Faltan datos 💀");
 
     const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
     reminders.push({ id: Date.now(), title, datetime, desc, notified: false });
-    
     reminders.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
     
     localStorage.setItem('kuromi_reminders', JSON.stringify(reminders));
     closeModal('reminder-modal');
     loadReminders();
+    updateStats();
     
     document.getElementById('rem-title').value = '';
     document.getElementById('rem-datetime').value = '';
@@ -87,27 +122,31 @@ function addReminder() {
 function loadReminders() {
     const list = document.getElementById('reminder-list');
     const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
+    const now = new Date();
     
+    // Solo mostrar futuros
+    const futureReminders = reminders.filter(r => new Date(r.datetime) > now);
+
     list.innerHTML = '';
-    if (reminders.length === 0) {
+    if (futureReminders.length === 0) {
         list.innerHTML = '<div class="empty-state">Todo limpio por ahora... 😈</div>';
         return;
     }
 
-    reminders.forEach(r => {
+    futureReminders.forEach(r => {
         const dateObj = new Date(r.datetime);
         const dateStr = dateObj.toLocaleString('es-ES', { month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' });
         
         const div = document.createElement('div');
         div.className = 'item';
-        div.style.borderLeftColor = '#4b0082'; // Color diferente para recordatorios
+        div.style.borderLeftColor = '#581c87'; 
         div.innerHTML = `
             <div class="item-time">${dateStr}</div>
             <div class="item-details">
-                <strong>${r.title}</strong><br>
+                <strong>${r.title}</strong>
                 <small>${r.desc || ''}</small>
             </div>
-            <button class="delete-btn" onclick="deleteItem('kuromi_reminders', ${r.id})">️</button>
+            <button class="delete-btn" onclick="deleteItem('kuromi_reminders', ${r.id})">✕</button>
         `;
         list.appendChild(div);
     });
@@ -120,6 +159,7 @@ function deleteItem(storageKey, id) {
     localStorage.setItem(storageKey, JSON.stringify(items));
     if (storageKey === 'kuromi_classes') loadClasses();
     else loadReminders();
+    updateStats();
 }
 
 function openModal(id) {
@@ -142,32 +182,13 @@ function checkNotifications() {
 
     const now = new Date();
     const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
-    const classes = JSON.parse(localStorage.getItem('kuromi_classes')) || [];
 
-    // Chequear Recordatorios
     reminders.forEach(r => {
         const remTime = new Date(r.datetime);
-        // Si falta menos de 15 minutos y no ha sido notificado
         if (!r.notified && remTime > now && (remTime - now) < 900000) { 
             sendNotification(`Recordatorio: ${r.title}`, `Es hora de: ${r.desc || 'Revisar detalles'}`);
-            r.notified = true; // Marcar como notificado para no repetir
+            r.notified = true;
             localStorage.setItem('kuromi_reminders', JSON.stringify(reminders));
-        }
-    });
-
-    // Chequear Clases (Simplificado: asume que son de hoy)
-    // Nota: Para clases recurrentes se necesita lógica más compleja de fechas.
-    // Aquí notificamos si la hora coincide con la hora actual.
-    const currentHourMin = now.getHours() * 60 + now.getMinutes();
-    
-    classes.forEach(c => {
-        const [h, m] = c.time.split(':').map(Number);
-        const classMin = h * 60 + m;
-        
-        if (Math.abs(currentHourMin - classMin) <= 15 && currentHourMin >= classMin - 15) {
-             // Evitar spam de notificaciones en el mismo rango de 15 min
-             // En una app real, usaríamos un flag de notificación por día
-             sendNotification(`Clase: ${c.name}`, `Tu clase empieza a las ${c.time} en ${c.room || 'el aula'}`);
         }
     });
 }
