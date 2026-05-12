@@ -18,7 +18,7 @@
 body {
     font-family: var(--font-main);
     /* Fondo de Kuromi - Reemplaza la URL si quieres otra imagen */
-    background-image: url('https://i.pinimg.com/originals/87/3a/60/873a60c5d5b5e5f5e5f5e5f5e5f5e5f5.jpg'); 
+    background-image: url('bg.png'); 
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
