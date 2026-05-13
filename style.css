@@ -180,3 +180,14 @@ input, textarea, select {
     letter-spacing: 2px;
     font-family: 'Courier New', Courier, monospace; /* Fuente tipo digital/reloj */
 }
+
+/* Indicador AM/PM */
+.ampm-indicator {
+    font-size: 1.2rem; /* Más pequeño que la hora */
+    vertical-align: super; /* Lo sube un poquito */
+    margin-left: 5px;
+    color: var(--text-light); /* Color blanco suave */
+    text-shadow: none;
+    font-family: var(--font-main); /* Vuelve a la fuente kawaii */
+    font-weight: bold;
+}
