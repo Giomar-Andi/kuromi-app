@@ -294,16 +294,23 @@ function sendNotification(title, body) {
     new Notification(title, { body: body, icon: 'icons/icon-192.png' });
 }
 
-// --- Funciones para el Reloj en Tiempo Real ---
+// --- Funciones para el Reloj en Tiempo Real (Con AM/PM) ---
 function updateLiveClock() {
     const now = new Date();
-    // Formato HH:MM
-    const hours = String(now.getHours()).padStart(2, '0');
+    
+    let hours = now.getHours();
     const minutes = String(now.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    
+    // Convertir a formato 12 horas
+    hours = hours % 12;
+    hours = hours ? hours : 12; // La hora '0' debe ser '12'
+    hours = String(hours).padStart(2, '0');
     
     const clockElement = document.getElementById('live-clock');
     if (clockElement) {
-        clockElement.innerText = `${hours}:${minutes}`;
+        // Usamos un pequeño span para el AM/PM para poder estilizarlo diferente si queremos
+        clockElement.innerHTML = `${hours}:${minutes} <span class="ampm-indicator">${ampm}</span>`;
     }
 }
 
