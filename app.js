@@ -167,13 +167,26 @@ function loadClasses() {
 // --- Lógica de Recordatorios CON VALIDACIÓN Y ALERTAS ---
 function addReminder() {
     const title = document.getElementById('rem-title').value.trim();
-    const datetime = document.getElementById('rem-datetime').value;
+    const datetime = document.getElementById('rem-datetime').value; // Este es el campo clave
     const desc = document.getElementById('rem-desc').value.trim();
 
-    // Contar campos llenos
+    // 1. VALIDACIÓN Estricta: La fecha y hora ES OBLIGATORIA
+    if (!datetime) {
+        Swal.fire({
+            icon: 'error',
+            title: '¡OYEEEEE!',
+            text: 'Chinchin no puedes olvidarte de poner hora y fecha a tu reunión, piensa pe.',
+            confirmButtonText: 'Chi',
+            background: 'rgba(46, 0, 79, 0.95)',
+            color: '#fff'
+        });
+        return; // Detenemos la función aquí
+    }
+
+    // 2. Validación General: Al menos 2 campos llenos (incluyendo la fecha que ya validamos arriba)
     let filledCount = 0;
     if (title) filledCount++;
-    if (datetime) filledCount++;
+    if (datetime) filledCount++; // Ya sabemos que está lleno, pero sumamos para la lógica general
     if (desc) filledCount++;
 
     // ... dentro de addReminder, cuando validas ...
@@ -188,7 +201,7 @@ function addReminder() {
         });
         return;
     }
-
+// Si pasa las validaciones, guardamos
     const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
     reminders.push({ id: Date.now(), title: title || 'Sin Título', datetime, desc, notified: false });
     reminders.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
