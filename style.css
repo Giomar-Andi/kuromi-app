@@ -180,12 +180,21 @@ input, textarea, select {
     border: 1px solid var(--secondary) !important;
 }
 
-/* Clase especial para cuando queremos imagen de fondo completa */
+/* Clase especial para alertas con fondo de imagen/GIF */
 .kuromi-bg-alert {
-    /* Reemplaza 'bg-sweet.jpg' por una imagen de Kuromi que tengas en tu carpeta */
-    background-image: url('bg-sweet.jpg') !important;
+    /* 
+       TRUCO: Usamos un gradiente negro/morado semitransparente SOBRE la imagen.
+       Cambia 'bg-kuromi.gif' por tu archivo real. Si es JPG o PNG, funciona igual.
+    */
+    background-image: linear-gradient(rgba(46, 0, 79, 0.85), rgba(26, 11, 46, 0.9)), url('bg-sweet.jpg') !important;
+    
     background-size: cover !important;
     background-position: center !important;
+    background-repeat: no-repeat !important;
+    
+    /* Aseguramos bordes redondeados y sombra para que flote bonito */
+    border-radius: 20px !important;
+    box-shadow: 0 0 30px rgba(217, 70, 239, 0.4) !important;
 }
 
 /* Estilos para el Reloj Digital */
