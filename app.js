@@ -277,8 +277,8 @@ function confirmDelete(storageKey, id) {
         cancelButtonText: 'Cancelar',
         
         // AQUÍ LA MAGIA DEL FONDO:
-        background: 'rgba(46, 0, 79, 0.95)', // Fondo oscuro morado
-        color: '#fff',
+        //background: 'rgba(46, 0, 79, 0.95)', // Fondo oscuro morado
+        //color: '#fff',
         
         // Si quieres usar la imagen de fondo completa, descomenta la siguiente línea:
         customClass: { popup: 'kuromi-bg-alert' } 
