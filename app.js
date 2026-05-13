@@ -293,3 +293,20 @@ function checkNotifications() {
 function sendNotification(title, body) {
     new Notification(title, { body: body, icon: 'icons/icon-192.png' });
 }
+
+// --- Funciones para el Reloj en Tiempo Real ---
+function updateLiveClock() {
+    const now = new Date();
+    // Formato HH:MM
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    
+    const clockElement = document.getElementById('live-clock');
+    if (clockElement) {
+        clockElement.innerText = `${hours}:${minutes}`;
+    }
+}
+
+// Iniciar el reloj
+setInterval(updateLiveClock, 1000); // Actualiza cada segundo
+updateLiveClock(); // Ejecuta inmediatamente al cargar
