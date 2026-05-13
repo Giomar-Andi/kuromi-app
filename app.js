@@ -277,8 +277,8 @@ function confirmDelete(storageKey, id) {
         cancelButtonText: 'Cancelar',
         
         // AQUÍ LA MAGIA DEL FONDO:
-        //backgroundImage: 'url("bg-sweet.jpg")', // O usa 'url("bg-sweet.jpg")' si configuraste la clase CSS
-        //color: '#fff',
+        backgroundImage: 'url("bg-sweet.jpg")', // O usa 'url("bg-sweet.jpg")' si configuraste la clase CSS
+        color: '#fff',
         
         // Si quieres usar la imagen de fondo completa, descomenta la siguiente línea:
         customClass: { popup: 'kuromi-bg-alert' } 
