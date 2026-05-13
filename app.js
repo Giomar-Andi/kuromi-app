@@ -355,3 +355,74 @@ function updateLiveClock() {
 // Iniciar el reloj
 setInterval(updateLiveClock, 1000); // Actualiza cada segundo
 updateLiveClock(); // Ejecuta inmediatamente al cargar
+
+// --- Funciones para Vista Previa de Detalles ---
+
+function showClassDetails(id) {
+    const classes = JSON.parse(localStorage.getItem('kuromi_classes')) || [];
+    const c = classes.find(item => item.id === id);
+    
+    if (!c) return;
+
+    const daysStr = c.days.length > 0 ? c.days.join(', ') : 'No especificado';
+    
+    const html = `
+        <div class="detail-row">
+            <span class="detail-label">Materia</span>
+            <span class="detail-value">${c.name}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Profesor/a</span>
+            <span class="detail-value">${c.teacher || 'No registrado'}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Horario</span>
+            <span class="detail-value">${c.timeStart || '--:--'} - ${c.timeEnd || '--:--'}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Aula</span>
+            <span class="detail-value">${c.room || 'No registrada'}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Días</span>
+            <span class="detail-value">${daysStr}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Periodo</span>
+            <span class="detail-value">${c.startMonth || '?'} a ${c.endMonth || '?'}</span>
+        </div>
+    `;
+
+    document.getElementById('detail-title').innerText = "Detalles de Clase 📚";
+    document.getElementById('detail-body').innerHTML = html;
+    openModal('detail-modal');
+}
+
+function showReminderDetails(id) {
+    const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
+    const r = reminders.find(item => item.id === id);
+    
+    if (!r) return;
+
+    const dateObj = new Date(r.datetime);
+    const dateStr = dateObj.toLocaleString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute:'2-digit' });
+
+    const html = `
+        <div class="detail-row">
+            <span class="detail-label">Título</span>
+            <span class="detail-value">${r.title}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Fecha y Hora</span>
+            <span class="detail-value">${dateStr}</span>
+        </div>
+        <div class="detail-row">
+            <span class="detail-label">Detalles / Notas</span>
+            <span class="detail-value">${r.desc || 'Sin notas adicionales.'}</span>
+        </div>
+    `;
+
+    document.getElementById('detail-title').innerText = "Detalles de Recordatorio 💀";
+    document.getElementById('detail-body').innerHTML = html;
+    openModal('detail-modal');
+}
