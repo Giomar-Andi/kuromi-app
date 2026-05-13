@@ -5,7 +5,7 @@
     --bg-dark: #1a0b2e;
     --text-light: #f3e5f5;
     --text-muted: #c4b5fd;
-    --font-main: 'Fredoka', sans-serif;
+    --font-main: 'Poppins', sans-serif; 
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
