@@ -289,3 +289,21 @@ input, textarea, select {
     margin-top: 5px;
     display: block;
 }
+
+/* --- FONDO PARA EL MODAL DE DETALLES --- */
+.detail-kuromi-bg {
+    /* 
+       Capa oscura morada SOBRE la imagen. 
+       Ajusta el 0.9 si quieres ver más o menos la imagen de fondo.
+       Cambia 'bg-kuromi.gif' por tu archivo real (puede ser gif, jpg o png).
+    */
+    background-image: linear-gradient(rgba(46, 0, 79, 0.92), rgba(26, 11, 46, 0.95)), url('bg-kuromi.gif') !important;
+    
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    
+    /* Borde brillante para que destaque */
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 0 25px rgba(217, 70, 239, 0.5) !important;
+}
