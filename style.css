@@ -209,3 +209,11 @@ input, textarea, select {
     font-family: var(--font-main); /* Vuelve a la fuente kawaii */
     font-weight: bold;
 }
+
+/* Sombras fuertes para leer texto sobre GIFs */
+.swal-title-shadow {
+    text-shadow: 2px 2px 4px #000 !important;
+}
+.swal-text-shadow {
+    text-shadow: 1px 1px 2px #000 !important;
+}
