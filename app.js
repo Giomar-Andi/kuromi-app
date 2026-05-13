@@ -64,13 +64,15 @@ function addClass() {
     if (startMonth) filledCount++;
     if (endMonth) filledCount++;
 
-    // Validación: Mínimo 2 campos llenos
+    // ... dentro de addClass, cuando validas ...
     if (filledCount < 2) {
         Swal.fire({
             icon: 'warning',
-            title: 'Oops...',
-            text: 'Por favor, llena al menos 2 campos para guardar la clase. 😈',
-            confirmButtonText: 'Entendido'
+            title: '¡OYEEEEE!',
+            text: 'Chinchin, llena al menos 2 campos para guardar la clase, puecher?.',
+            confirmButtonText: 'Chi',
+            background: 'rgba(46, 0, 79, 0.95)', // Fondo oscuro morado
+            color: '#fff'
         });
         return;
     }
@@ -107,13 +109,15 @@ function addClass() {
     loadClasses();
     updateStats();
     
-    // Alerta de Éxito
+    // ... más abajo, cuando guardas con éxito ...
     Swal.fire({
         icon: 'success',
         title: '¡Clase Guardada!',
-        text: 'Tu horario ha sido actualizado. 🎀',
-        timer: 1500,
-        showConfirmButton: false
+        text: 'Tu clase se guardó chinchin.',
+        timer: 3000,
+        showConfirmButton: false,
+        background: 'rgba(46, 0, 79, 0.95)',
+        color: '#fff'
     });
     
     // Limpiar
@@ -172,12 +176,15 @@ function addReminder() {
     if (datetime) filledCount++;
     if (desc) filledCount++;
 
+    // ... dentro de addReminder, cuando validas ...
     if (filledCount < 2) {
         Swal.fire({
             icon: 'warning',
-            title: 'Faltan datos',
-            text: 'Llena al menos 2 campos para crear el recordatorio. 💀',
-            confirmButtonText: 'Ok'
+            title: '¡OYEEEEE!',
+            text: 'Chinchin, llena al menos 2 campos para guardar el recordatorio, apura compare.',
+            confirmButtonText: 'Chi',
+            background: 'rgba(46, 0, 79, 0.95)',
+            color: '#fff'
         });
         return;
     }
@@ -191,12 +198,15 @@ function addReminder() {
     loadReminders();
     updateStats();
     
+    // ... más abajo, cuando guardas con éxito ...
     Swal.fire({
         icon: 'success',
         title: '¡Recordatorio Creado!',
-        text: 'No olvides cumplirlo. 😈',
-        timer: 1500,
-        showConfirmButton: false
+        text: 'No olvides cumplirlo porque vuelo compare.',
+        timer: 3000,
+        showConfirmButton: false,
+        background: 'rgba(46, 0, 79, 0.95)',
+        color: '#fff'
     });
     
     document.getElementById('rem-title').value = '';
@@ -235,27 +245,35 @@ function loadReminders() {
     });
 }
 
-// --- Función de Eliminación con Confirmación Bonita ---
 function confirmDelete(storageKey, id) {
     Swal.fire({
         title: '¿Eliminar?',
-        text: "Esta acción no se puede deshacer.",
+        text: "Vas a eliminar chinchin?.",
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#d946ef',
         cancelButtonColor: '#4a4a4a',
-        confirmButtonText: 'Sí, borrar',
+        confirmButtonText: 'Chi, borrar',
         cancelButtonText: 'Cancelar',
-        background: '#2e004f',
-        color: '#fff'
+        
+        // AQUÍ LA MAGIA DEL FONDO:
+        background: 'rgba(46, 0, 79, 0.95)', // O usa 'url("bg-sweet.jpg")' si configuraste la clase CSS
+        color: '#fff',
+        
+        // Si quieres usar la imagen de fondo completa, descomenta la siguiente línea:
+        // customClass: { popup: 'kuromi-bg-alert' } 
     }).then((result) => {
         if (result.isConfirmed) {
             deleteItem(storageKey, id);
-            Swal.fire(
-                '¡Borrado!',
-                'El elemento ha sido eliminado.',
-                'success'
-            )
+            Swal.fire({
+                title: '¡Borrado!',
+                text: 'Se elimino tu clase y/o recordatorio chinchin.',
+                icon: 'success',
+                background: 'rgba(46, 0, 79, 0.95)',
+                color: '#fff',
+                timer: 3000,
+                showConfirmButton: false
+            })
         }
     });
 }
