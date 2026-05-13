@@ -305,7 +305,18 @@ function deleteItem(storageKey, id) {
 }
 
 function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+function closeModal(id) {
+    const modal = document.getElementById(id);
+    modal.style.display = 'none';
+    
+    // Si es el modal de detalles, quitamos la clase de fondo para resetearlo
+    if (id === 'detail-modal') {
+        const modalContent = modal.querySelector('.modal-content');
+        if (modalContent) {
+            modalContent.classList.remove('detail-kuromi-bg');
+        }
+    }
+}
 
 function requestNotificationPermission() {
     if ("Notification" in window) Notification.requestPermission();
@@ -355,6 +366,8 @@ updateLiveClock(); // Ejecuta inmediatamente al cargar
 
 // --- Funciones para Vista Previa de Detalles ---
 
+// --- Funciones para Vista Previa de Detalles (CON FONDO KUROMI) ---
+
 function showClassDetails(id) {
     const classes = JSON.parse(localStorage.getItem('kuromi_classes')) || [];
     const c = classes.find(item => item.id === id);
@@ -392,6 +405,11 @@ function showClassDetails(id) {
 
     document.getElementById('detail-title').innerText = "Detalles de Clase 📚";
     document.getElementById('detail-body').innerHTML = html;
+    
+    // APLICAR LA CLASE DE FONDO AQUÍ
+    const modalContent = document.querySelector('#detail-modal .modal-content');
+    modalContent.classList.add('detail-kuromi-bg');
+    
     openModal('detail-modal');
 }
 
@@ -421,5 +439,10 @@ function showReminderDetails(id) {
 
     document.getElementById('detail-title').innerText = "Detalles de Recordatorio 💀";
     document.getElementById('detail-body').innerHTML = html;
+
+    // APLICAR LA CLASE DE FONDO AQUÍ
+    const modalContent = document.querySelector('#detail-modal .modal-content');
+    modalContent.classList.add('detail-kuromi-bg');
+
     openModal('detail-modal');
 }
