@@ -186,7 +186,7 @@ input, textarea, select {
        TRUCO: Usamos un gradiente negro/morado semitransparente SOBRE la imagen.
        Cambia 'bg-kuromi.gif' por tu archivo real. Si es JPG o PNG, funciona igual.
     */
-    background-image: linear-gradient(rgba(46, 0, 79, 0.85), rgba(26, 11, 46, 0.9)), url('bg-sweet.jpg') !important;
+    background-image: linear-gradient(rgba(46, 0, 79, 0.85), rgba(26, 11, 46, 0.9)), url('bg-sweet.gif') !important;
     
     background-size: cover !important;
     background-position: center !important;
