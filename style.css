@@ -217,3 +217,66 @@ input, textarea, select {
 .swal-text-shadow {
     text-shadow: 1px 1px 2px #000 !important;
 }
+
+/* --- SCROLL PERSONALIZADO ESTILO KUROMI --- */
+.list-container {
+    max-height: 300px; /* Altura máxima antes de hacer scroll */
+    overflow-y: auto;  /* Activa el scroll vertical */
+    padding-right: 5px; /* Espacio para que no pegue al borde */
+}
+
+/* Estilo para navegadores Webkit (Chrome, Safari, Edge) */
+.list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.list-container::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2); 
+    border-radius: 4px;
+}
+
+.list-container::-webkit-scrollbar-thumb {
+    background: var(--accent); /* Color Fucsia Kuromi */
+    border-radius: 4px;
+    box-shadow: 0 0 5px var(--primary);
+}
+
+.list-container::-webkit-scrollbar-thumb:hover {
+    background: #ff1493; /* Un poco más brillante al pasar el mouse */
+}
+
+/* --- ESTILOS PARA LA VISTA PREVIA (CLICK EN FILA) --- */
+.item {
+    cursor: pointer; /* Manita al pasar el mouse */
+    transition: background 0.2s, transform 0.1s;
+}
+
+.item:hover {
+    background: rgba(217, 70, 239, 0.1); /* Brillo suave al pasar el mouse */
+    transform: scale(1.01);
+}
+
+/* Modal de Detalles */
+.detail-modal-content {
+    text-align: left;
+}
+
+.detail-row {
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.detail-label {
+    color: var(--accent);
+    font-weight: bold;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.detail-value {
+    color: white;
+    font-size: 1.1rem;
+    margin-top: 5px;
+    display: block;
+}
