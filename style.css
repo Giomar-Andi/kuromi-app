@@ -169,3 +169,14 @@ input, textarea, select {
     color: white !important;
     border: 1px solid var(--secondary) !important;
 }
+
+/* Estilos para el Reloj Digital */
+.live-clock {
+    font-size: 3.5rem; /* Tamaño grande */
+    font-weight: 600;
+    color: var(--accent); /* Color Fucsia/Kuromi */
+    text-shadow: 0 0 10px rgba(217, 70, 239, 0.5), 2px 2px 0px #000;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-family: 'Courier New', Courier, monospace; /* Fuente tipo digital/reloj */
+}
