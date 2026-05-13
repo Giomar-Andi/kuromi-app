@@ -143,31 +143,49 @@ input, textarea, select {
 }
 .empty-state { text-align: center; color: var(--text-muted); padding: 20px; font-style: italic; font-size: 0.9rem; }
 
-/* --- ESTILOS PERSONALIZADOS PARA SWEETALERT2 (KUROMI STYLE) --- */
+/* --- ESTILOS PERSONALIZADOS PARA SWEETALERT2 (KUROMI STYLE CON FONDO) --- */
 .swal2-popup {
-    background: linear-gradient(135deg, #2e004f, #581c87) !important;
+    /* Fondo semi-transparente oscuro para que se lea el texto sobre la imagen */
+    background: rgba(46, 0, 79, 0.95) !important; 
     border: 2px solid var(--accent) !important;
     color: white !important;
     font-family: var(--font-main) !important;
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.5) !important;
 }
+
 .swal2-title {
     color: var(--accent) !important;
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 2px 2px 4px black;
+    font-weight: bold;
 }
+
 .swal2-html-container {
     color: var(--text-light) !important;
+    font-size: 1.1rem;
 }
+
 .swal2-confirm {
     background-color: var(--accent) !important;
     font-weight: bold;
+    box-shadow: 0 0 10px var(--accent);
 }
+
 .swal2-cancel {
     background-color: #4a4a4a !important;
 }
+
 .swal2-input, .swal2-textarea {
-    background: rgba(0,0,0,0.3) !important;
+    background: rgba(0,0,0,0.5) !important;
     color: white !important;
     border: 1px solid var(--secondary) !important;
+}
+
+/* Clase especial para cuando queremos imagen de fondo completa */
+.kuromi-bg-alert {
+    /* Reemplaza 'bg-sweet.jpg' por una imagen de Kuromi que tengas en tu carpeta */
+    background-image: url('bg-sweet.jpg') !important; 
+    background-size: cover !important;
+    background-position: center !important;
 }
 
 /* Estilos para el Reloj Digital */
