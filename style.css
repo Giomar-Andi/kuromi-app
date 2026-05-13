@@ -183,7 +183,7 @@ input, textarea, select {
 /* Clase especial para cuando queremos imagen de fondo completa */
 .kuromi-bg-alert {
     /* Reemplaza 'bg-sweet.jpg' por una imagen de Kuromi que tengas en tu carpeta */
-    background-image: url('bg-sweet.jpg') !important; 
+    background-image: url('bg-sweet.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
 }
