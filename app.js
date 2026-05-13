@@ -368,27 +368,27 @@ function showClassDetails(id) {
     
     const html = `
         <div class="detail-row">
-            <span class="detail-label">Materia</span>
+            <span class="detail-label">Materia:</span>
             <span class="detail-value">${c.name}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Profesor/a</span>
+            <span class="detail-label">Profesor/a:</span>
             <span class="detail-value">${c.teacher || 'No registrado'}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Horario</span>
+            <span class="detail-label">Horario:</span>
             <span class="detail-value">${c.timeStart || '--:--'} - ${c.timeEnd || '--:--'}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Aula</span>
+            <span class="detail-label">Aula:</span>
             <span class="detail-value">${c.room || 'No registrada'}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Días</span>
+            <span class="detail-label">Días:</span>
             <span class="detail-value">${daysStr}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Periodo</span>
+            <span class="detail-label">Periodo:</span>
             <span class="detail-value">${c.startMonth || '?'} a ${c.endMonth || '?'}</span>
         </div>
     `;
@@ -409,15 +409,15 @@ function showReminderDetails(id) {
 
     const html = `
         <div class="detail-row">
-            <span class="detail-label">Título</span>
+            <span class="detail-label">Título:</span>
             <span class="detail-value">${r.title}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Fecha y Hora</span>
+            <span class="detail-label">Fecha y Hora:</span>
             <span class="detail-value">${dateStr}</span>
         </div>
         <div class="detail-row">
-            <span class="detail-label">Detalles / Notas</span>
+            <span class="detail-label">Detalles / Notas:</span>
             <span class="detail-value">${r.desc || 'Sin notas adicionales.'}</span>
         </div>
     `;
