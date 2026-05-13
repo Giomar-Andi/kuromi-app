@@ -146,6 +146,9 @@ function loadClasses() {
         
         const div = document.createElement('div');
         div.className = 'item';
+        // Al hacer click, llamamos a showClassDetails con el ID de la clase
+        div.onclick = () => showClassDetails(c.id); 
+        
         div.innerHTML = `
             <div class="item-time">
                 ${c.timeStart || '--:--'}
@@ -153,12 +156,13 @@ function loadClasses() {
             </div>
             <div class="item-details">
                 <strong>${c.name}</strong>
-                <small>👩🏫 ${c.teacher || 'Sin prof.'} | 📍 ${c.room || '-'}</small>
+                <small>👩 ${c.teacher || 'Sin prof.'} | 📍 ${c.room || '-'}</small>
                 <div class="tags">
                     📅 ${daysStr} | ${c.startMonth || '?'} - ${c.endMonth || '?'}
                 </div>
             </div>
-            <button class="delete-btn" onclick="confirmDelete('kuromi_classes', ${c.id})">✕</button>
+            <!-- El botón de borrar tiene stopPropagation para no abrir el modal al borrar -->
+            <button class="delete-btn" onclick="event.stopPropagation(); confirmDelete('kuromi_classes', ${c.id})">✕</button>
         `;
         list.appendChild(div);
     });
@@ -229,7 +233,7 @@ function addReminder() {
 
 function loadReminders() {
     const list = document.getElementById('reminder-list');
-    const reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
+    let reminders = JSON.parse(localStorage.getItem('kuromi_reminders')) || [];
     const now = new Date();
     const futureReminders = reminders.filter(r => new Date(r.datetime) > now);
 
@@ -246,13 +250,16 @@ function loadReminders() {
         const div = document.createElement('div');
         div.className = 'item';
         div.style.borderLeftColor = '#581c87'; 
+        // Al hacer click, llamamos a showReminderDetails con el ID
+        div.onclick = () => showReminderDetails(r.id);
+        
         div.innerHTML = `
             <div class="item-time">${dateStr}</div>
             <div class="item-details">
                 <strong>${r.title}</strong>
                 <small>${r.desc || ''}</small>
             </div>
-            <button class="delete-btn" onclick="confirmDelete('kuromi_reminders', ${r.id})">✕</button>
+            <button class="delete-btn" onclick="event.stopPropagation(); confirmDelete('kuromi_reminders', ${r.id})">✕</button>
         `;
         list.appendChild(div);
     });
