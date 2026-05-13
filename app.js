@@ -71,8 +71,7 @@ function addClass() {
             title: '¡OYEEEEE!',
             text: 'Chinchin, llena al menos 2 campos para guardar la clase, puecher?.',
             confirmButtonText: 'Chi',
-            background: 'rgba(46, 0, 79, 0.95)', // Fondo oscuro morado
-            color: '#fff'
+            customClass: { popup: 'kuromi-bg-alert' }
         });
         return;
     }
@@ -83,7 +82,8 @@ function addClass() {
             icon: 'error',
             title: 'Error de Hora',
             text: 'Si pones hora de inicio, pon también la de fin. ⏰',
-            confirmButtonText: 'Corregir'
+            confirmButtonText: 'Corregir',
+            customClass: { popup: 'kuromi-bg-alert' }
         });
         return;
     }
@@ -116,8 +116,7 @@ function addClass() {
         text: 'Tu clase se guardó chinchin.',
         timer: 6000,
         showConfirmButton: false,
-        background: 'rgba(46, 0, 79, 0.95)',
-        color: '#fff'
+        customClass: { popup: 'kuromi-bg-alert' }
     });
     
     // Limpiar
@@ -181,8 +180,7 @@ function addReminder() {
             title: '¡OYEEEEE!',
             text: 'Chinchin no puedes olvidarte de poner hora y fecha a tu reunión, piensa pe.',
             confirmButtonText: 'Chi',
-            background: 'rgba(46, 0, 79, 0.95)',
-            color: '#fff'
+            customClass: { popup: 'kuromi-bg-alert' }
         });
         return; // Detenemos la función aquí
     }
@@ -200,8 +198,7 @@ function addReminder() {
             title: '¡OYEEEEE!',
             text: 'Chinchin, llena al menos 2 campos para guardar el recordatorio, apura compare.',
             confirmButtonText: 'Chi',
-            background: 'rgba(46, 0, 79, 0.95)',
-            color: '#fff'
+            customClass: { popup: 'kuromi-bg-alert' }
         });
         return;
     }
@@ -222,8 +219,7 @@ function addReminder() {
         text: 'No olvides cumplirlo porque vuelo compare.',
         timer: 6000,
         showConfirmButton: false,
-        background: 'rgba(46, 0, 79, 0.95)',
-        color: '#fff'
+        customClass: { popup: 'kuromi-bg-alert' } 
     });
     
     document.getElementById('rem-title').value = '';
@@ -292,7 +288,8 @@ function confirmDelete(storageKey, id) {
                 background: 'rgba(46, 0, 79, 0.95)',
                 color: '#fff',
                 timer: 6000,
-                showConfirmButton: false
+                showConfirmButton: false,
+                customClass: { popup: 'kuromi-bg-alert' } 
             })
         }
     });
