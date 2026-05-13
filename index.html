@@ -130,7 +130,19 @@
             <button onclick="addReminder()" class="save-btn">+ Añadir recordatorio 💜</button>
         </div>
     </div>
-
+    
+    <!-- Modal de Vista Previa / Detalles -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content detail-modal-content">
+            <span class="close" onclick="closeModal('detail-modal')">&times;</span>
+            <h3 id="detail-title">Detalles</h3>
+            <div id="detail-body">
+                <!-- Aquí se inyectará la información dinámicamente -->
+            </div>
+            <button onclick="closeModal('detail-modal')" class="save-btn" style="margin-top:20px;">Cerrar</button>
+        </div>
+    </div>
+    
     <script src="app.js"></script>
 </body>
 </html>
