@@ -114,7 +114,7 @@ function addClass() {
         icon: 'success',
         title: '¡Clase Guardada!',
         text: 'Tu clase se guardó chinchin.',
-        timer: 3000,
+        timer: 6000,
         showConfirmButton: false,
         background: 'rgba(46, 0, 79, 0.95)',
         color: '#fff'
@@ -203,7 +203,7 @@ function addReminder() {
         icon: 'success',
         title: '¡Recordatorio Creado!',
         text: 'No olvides cumplirlo porque vuelo compare.',
-        timer: 3000,
+        timer: 6000,
         showConfirmButton: false,
         background: 'rgba(46, 0, 79, 0.95)',
         color: '#fff'
@@ -271,7 +271,7 @@ function confirmDelete(storageKey, id) {
                 icon: 'success',
                 background: 'rgba(46, 0, 79, 0.95)',
                 color: '#fff',
-                timer: 3000,
+                timer: 6000,
                 showConfirmButton: false
             })
         }
