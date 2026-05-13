@@ -277,7 +277,7 @@ function confirmDelete(storageKey, id) {
         cancelButtonText: 'Cancelar',
         
         // AQUÍ LA MAGIA DEL FONDO:
-        background: 'url("bg-sweet.jpg")', // O usa 'url("bg-sweet.jpg")' si configuraste la clase CSS
+        backgroundImage: 'url("bg-sweet.jpg")', // O usa 'url("bg-sweet.jpg")' si configuraste la clase CSS
         color: '#fff',
         
         // Si quieres usar la imagen de fondo completa, descomenta la siguiente línea:
